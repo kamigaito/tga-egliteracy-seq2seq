@@ -2,46 +2,30 @@
 
 # 導入
 
-```
-git clone --recursive REPOSITORY_NAME
-```
+## 環境変数の設定
+`${ROOT_DIR}/.bashrc`中の`${ROOT_DIR}`を環境に応じて書き換える．
 
-`/.bashrc`を環境に応じて書き換える
-
-${ROOTDIR}に
+## 環境構築
+```
+cd ${ROOT_DIR}
+chmod +x setup.sh
+./setup.sh
+```
+これにより`${ROOT_DIR}`に
 - [anaconda3](https://www.anaconda.com/distribution/)
-をインストールする．
-インストールが終了したら，次のモジュールを導入する．
+がインストールされ，
+pythonモジュール
 - Pytorch
 - TorchText
 - ConfigArgParse
-```
-conda install pytorch
-conda install torchtext
-conda install configargparse
-```
-[kytea](http://www.phontron.com/kytea/download/kytea-0.4.7.tar.gz)についてはprefixをkyteaのディレクトリ直下としてインストールする．
-```
-# Kyteaのインストール方法
-cd apps/kytea-0.4.7
-./configure --prefix=$PWD
-make
-make install
-```
-もし通常の
-```
-git clone
-```
-でインストールを行った場合には，追加で
-${ROOTDIR}/appsの
-- [OpenNMT-py](https://github.com/OpenNMT/OpenNMT-py.git)
-- [mosesdecoder](https://github.com/moses-smt/mosesdecoder.git)
-をcloneする．
-```
-cd apps
-git clone https://github.com/OpenNMT/OpenNMT-py.git
-git clone https://github.com/moses-smt/mosesdecoder.git
-```
+がインストールされる．
+また，
+${ROOT_DIR}/appsに必要なツール類
+- mosesdecoder
+- OpenNMT-py
+- [kytea-0.4.7](http://www.phontron.com/kytea/download/kytea-0.4.7.tar.gz)
+がそれぞれインストールされる．
+[kytea](http://www.phontron.com/kytea/download/kytea-0.4.7.tar.gz)についてはprefixをkyteaのディレクトリ直下としてインストールされる．
 
 # 実行方法
 
@@ -54,17 +38,17 @@ git clone https://github.com/moses-smt/mosesdecoder.git
 実行後の翻訳結果は
 ```
 # 英語から日本語
-${WORKDIR}/seq2seq/outputs/test.ja
+${WORK_DIR}/seq2seq/outputs/test.ja
 # 日本語から英語
-${WORKDIR}/seq2seq/outputs/test.en
+${WORK_DIR}/seq2seq/outputs/test.en
 ```
 のように出力される．
 同様に翻訳結果の評価結果も
 ```
 # 英語から日本語
-${WORKDIR}/seq2seq/outputs/result_en-ja.bleu
+${WORK_DIR}/seq2seq/outputs/result_en-ja.bleu
 # 日本語から英語
-${WORKDIR}/seq2seq/outputs/result_ja-en.bleu
+${WORK_DIR}/seq2seq/outputs/result_ja-en.bleu
 ```
 のように出力される．
 `result_en-ja.bleu`は英日翻訳の評価スコア（BLEU）を，
@@ -72,13 +56,13 @@ ${WORKDIR}/seq2seq/outputs/result_ja-en.bleu
 事前に
 ```
 # 英文の入力
-${WORKDIR}/seq2seq/input/user.en
+${WORK_DIR}/seq2seq/input/user.en
 # 日本語文の入力
-${WORKDIR}/seq2seq/input/user.ja
+${WORK_DIR}/seq2seq/input/user.ja
 ```
 上記のファイルを作成し，翻訳を行いたい内容を一行一文で記載することで
 任意の内容の翻訳を体験できる．
 その場合の翻訳結果は
-`${WORKDIR}/seq2seq/outputs/user.en`
-`${WORKDIR}/seq2seq/outputs/user.ja`
+`${WORK_DIR}/seq2seq/outputs/user.en`
+`${WORK_DIR}/seq2seq/outputs/user.ja`
 に出力される．

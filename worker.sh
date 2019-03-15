@@ -7,15 +7,15 @@
 module load cuda
 
 # This directory contains libraries and exexution files.
-ROOTDIR=/gs/hs0/tga-egliteracy/egs/seq2seq
+ROOT_DIR=/gs/hs0/tga-egliteracy/egs/seq2seq
 # This directory contains training, development and test set
-DATADIR=/gs/hs0/tga-egliteracy/egs/seq2seq/dataset
+DATA_DIR=/gs/hs0/tga-egliteracy/egs/seq2seq/dataset
 # This directory contains output directions.
-WORKDIR=${HOME}/seq2seq
+WORK_DIR=${HOME}/seq2seq
 
-source ${ROOTDIR}/.bashrc
+source ${ROOT_DIR}/.bashrc
 /usr/bin/env
 
-##${ROOTDIR}/prep.sh ${ROOTDIR} ${DATADIR} ${WORKDIR}
-${ROOTDIR}/train.sh ${ROOTDIR} ${DATADIR} ${WORKDIR}
-${ROOTDIR}/eval.sh ${ROOTDIR} ${DATADIR} ${WORKDIR}
+##${ROOT_DIR}/prep.sh ${ROOT_DIR} ${DATA_DIR} ${WORK_DIR}
+${ROOT_DIR}/train.sh ${ROOT_DIR} ${DATA_DIR} ${WORK_DIR}
+${ROOT_DIR}/eval.sh ${ROOT_DIR} ${DATA_DIR} ${WORK_DIR}

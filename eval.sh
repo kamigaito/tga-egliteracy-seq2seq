@@ -1,35 +1,35 @@
 #!/bin/sh
 
-ROOTDIR=${1}
-DATADIR=${2}
-WORKDIR=${3}
-MODELS=${WORKDIR}/models
-DATASET=${DATADIR}/kftt-data-1.0/data/tok
-OUTDIR=${WORKDIR}/outputs
-USRDIR=${WORKDIR}/input
+ROOT_DIR=${1}
+DATA_DIR=${2}
+WORK_DIR=${3}
+MODELS=${WORK_DIR}/models
+DATASET=${DATA_DIR}/kftt-data-1.0/data/tok
+OUT_DIR=${WORK_DIR}/outputs
+USRDIR=${WORK_DIR}/input
 suffix="en-ja ja-en"
 
-if [ ! -e ${OUTDIR} ]
+if [ ! -e ${OUT_DIR} ]
 then
-    mkdir -p ${OUTDIR}
+    mkdir -p ${OUT_DIR}
 fi
 
-cd ${ROOTDIR}/apps/OpenNMT-py
+cd ${ROOT_DIR}/apps/OpenNMT-py
 for lang_pair in ${suffix}; do
     src=`echo ${lang_pair} | awk -F"-" '{print $1}'`
     trg=`echo ${lang_pair} | awk -F"-" '{print $2}'`
     python translate.py \
         -model ${MODELS}/${lang_pair}_step_30000.pt \
         -src ${DATASET}/kyoto-test.${src} \
-        -output ${OUTDIR}/test.${trg} \
+        -output ${OUT_DIR}/test.${trg} \
         -gpu 0 \
         -beam_size 1 \
         -batch_size 512 \
         -verbose
-    perl ${ROOTDIR}/scripts/multi-bleu.perl \
+    perl ${ROOT_DIR}/scripts/multi-bleu.perl \
         ${DATASET}/kyoto-test.${trg} \
-        < ${OUTDIR}/test.${trg} \
-        > ${OUTDIR}/result_${lang_pair}.bleu
+        < ${OUT_DIR}/test.${trg} \
+        > ${OUT_DIR}/result_${lang_pair}.bleu
 done
 if [ ! -e ${USRDIR} ]
 then
@@ -42,14 +42,14 @@ for lang_pair in ${suffix}; do
     if [ ${src} = "ja" -a ${src} != "en" ]
     then
         # Tokenize Japanese sentences
-        bash ${ROOTDIR}/apps/kytea-0.4.7/src/bin/kytea \
+        bash ${ROOT_DIR}/apps/kytea-0.4.7/src/bin/kytea \
         < ${USRDIR}/user.${src} |\
         sed 's/\/[^ ]\+//g' \
         > ${USRDIR}/user.tok.${src}
     elif [ ${src} = "en" -a ${src} != "ja" ]
     then
         # Tokenize English sentences
-        perl ${ROOTDIR}/apps/mosesdecoder/scripts/tokenizer/tokenizer.perl \
+        perl ${ROOT_DIR}/apps/mosesdecoder/scripts/tokenizer/tokenizer.perl \
         -l en \
         < ${USRDIR}/user.${src} \
         > ${USRDIR}/user.tok.${src}
@@ -60,7 +60,7 @@ for lang_pair in ${suffix}; do
     python translate.py \
         -model ${MODELS}/${lang_pair}_step_30000.pt \
         -src ${USRDIR}/user.tok.${src} \
-        -output ${OUTDIR}/user.${trg} \
+        -output ${OUT_DIR}/user.${trg} \
         -gpu 0 \
         -beam_size 1 \
         -batch_size 512 \

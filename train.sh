@@ -1,15 +1,15 @@
 #!/bin/bash
 
-ROOTDIR=${1}
-DATADIR=${2}
-WORKDIR=${3}
-MODELDIR=${WORKDIR}/models
+ROOT_DIR=${1}
+DATA_DIR=${2}
+WORK_DIR=${3}
+MODEL_DIR=${WORK_DIR}/models
 
-if [ ! -e ${MODELDIR} ]
+if [ ! -e ${MODEL_DIR} ]
 then
-    mkdir -p ${MODELDIR}
+    mkdir -p ${MODEL_DIR}
 fi
-cd ${ROOTDIR}/apps/OpenNMT-py
+cd ${ROOT_DIR}/apps/OpenNMT-py
 suffix="en-ja ja-en"
 for lang_pair in ${suffix}; do
     src=`echo ${lang_pair} | awk -F"-" '{print $1}'`
@@ -19,7 +19,7 @@ for lang_pair in ${suffix}; do
         -train_tgt ${DATASET}/kyoto-train.cln.${trg} \
         -valid_src ${DATASET}/kyoto-dev.${src} \
         -valid_tgt ${DATASET}/kyoto-dev.${trg} \
-        -save_data ${MODELDIR}/dicts-${lang_pair} \
+        -save_data ${MODEL_DIR}/dicts-${lang_pair} \
         -src_words_min_frequency 5 \
         -tgt_words_min_frequency 5 \
         -src_seq_length 40 \
@@ -27,8 +27,8 @@ for lang_pair in ${suffix}; do
 done
 for lang_pair in ${suffix}; do
     python train.py \
-        -data ${MODELDIR}/dicts-${lang_pair} \
-        -save_model ${MODELDIR}/${lang_pair} \
+        -data ${MODEL_DIR}/dicts-${lang_pair} \
+        -save_model ${MODEL_DIR}/${lang_pair} \
         -layers 2 \
         -rnn_size 500 \
         -word_vec_size 300 \
