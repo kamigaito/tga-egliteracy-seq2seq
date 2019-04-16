@@ -7,7 +7,7 @@
 # added by Anaconda3 2018.12 installer
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!
-ROOT_DIR=$(cd $(dirname $0); pwd)"../"
+ROOT_DIR="/gs/hs0/tga-egliteracy/egs/seq2seq"
 __conda_setup="$(CONDA_REPORT_ERRORS=false ${ROOT_DIR}'/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
 if [ $? -eq 0 ]; then
     \eval "$__conda_setup"
