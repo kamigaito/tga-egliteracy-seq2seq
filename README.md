@@ -4,6 +4,7 @@
 
 ## 環境変数の設定
 `${ROOT_DIR}/.bashrc`中の`${ROOT_DIR}`を環境に応じて書き換える．
+初期設定では講義にて使用している`/gs/hs0/tga-egliteracy/egs/seq2seq`に設定されている．
 
 ## 環境構築
 ```
