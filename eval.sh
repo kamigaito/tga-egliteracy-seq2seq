@@ -7,6 +7,7 @@ MODELS=${WORK_DIR}/models
 DATASET=${DATA_DIR}/kftt-data-1.0/data/tok
 OUT_DIR=${WORK_DIR}/outputs
 USRDIR=${WORK_DIR}/input
+SCORE_PATH=$(cd $(dirname $0); pwd)/score.txt
 suffix="en-ja ja-en"
 
 if [ ! -e ${OUT_DIR} ]
@@ -31,9 +32,15 @@ for lang_pair in ${suffix}; do
         < ${OUT_DIR}/test.${trg} \
         > ${OUT_DIR}/result_${lang_pair}.bleu
 done
-if [ ! -e ${USRDIR} ]
+cp ${OUT_DIR}/result_en-ja.bleu ${SCORE_PATH}
+if [ ! -e ${USRDIR}/user.en ]
 then
-    echo "${USRDIR} does not exist."
+    echo "${USRDIR}/user.en does not exist."
+    exit
+fi
+if [ ! -e ${USRDIR}/user.ja ]
+then
+    echo "${USRDIR}/user.ja does not exist."
     exit
 fi
 for lang_pair in ${suffix}; do
