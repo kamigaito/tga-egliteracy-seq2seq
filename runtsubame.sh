@@ -1,7 +1,8 @@
 #!/bin/sh
 
+#$ -cwd
 #$ -l q_node=1
-#$ -l h_rt=6:00:0
+#$ -l h_rt=0:10:0
 
 . /etc/profile.d/modules.sh
 module load cuda
@@ -11,7 +12,9 @@ ROOT_DIR=/gs/hs0/tga-egliteracy/egs/seq2seq
 # This directory contains training, development and test set
 DATA_DIR=/gs/hs0/tga-egliteracy/egs/seq2seq/dataset
 # This directory contains output directions.
-WORK_DIR=${HOME}/seq2seq
+WORK_DIR=$(cd $(dirname $0); pwd)/work
+
+mkdir -p $WORK_DIR
 
 source ${ROOT_DIR}/.bashrc
 /usr/bin/env
