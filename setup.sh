@@ -1,9 +1,9 @@
 #!/bin/bash
 
-ROOT_DIR=$(cd $(dirname $0); pwd)"../"
+ROOT_DIR=$(cd $(dirname $0); pwd)
 APP_DIR=${ROOT_DIR}/apps
 
-if [ -e ${APP_DIR} ]
+if [ ! -e ${APP_DIR} ]
 then
     mkdir -p ${APP_DIR}
 fi
