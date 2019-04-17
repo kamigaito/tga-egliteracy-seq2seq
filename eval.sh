@@ -20,7 +20,7 @@ for lang_pair in ${suffix}; do
     src=`echo ${lang_pair} | awk -F"-" '{print $1}'`
     trg=`echo ${lang_pair} | awk -F"-" '{print $2}'`
     python translate.py \
-        -model ${MODELS}/${lang_pair}_step_30000.pt \
+        -model ${MODELS}/${lang_pair}_final.pt \
         -src ${DATASET}/kyoto-test.${src} \
         -output ${OUT_DIR}/test.${trg} \
         -gpu 0 \
@@ -65,7 +65,7 @@ for lang_pair in ${suffix}; do
         continue
     fi
     python translate.py \
-        -model ${MODELS}/${lang_pair}_step_30000.pt \
+        -model ${MODELS}/${lang_pair}_final.pt \
         -src ${USRDIR}/user.tok.${src} \
         -output ${OUT_DIR}/user.${trg} \
         -gpu 0 \

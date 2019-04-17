@@ -16,7 +16,10 @@ source ${ROOT_DIR}/.bashrc
 
 start_time=`date +%s`
 
-./train.sh ${ROOT_DIR} ${DATA_DIR} ${WORK_DIR} >& train.log
+./train.sh ${ROOT_DIR} ${DATA_DIR} ${WORK_DIR} train1p >& train.log
+#./train.sh ${ROOT_DIR} ${DATA_DIR} ${WORK_DIR} train20p >& train.log
+#./train.sh ${ROOT_DIR} ${DATA_DIR} ${WORK_DIR} train60p >& train.log
+#./train.sh ${ROOT_DIR} ${DATA_DIR} ${WORK_DIR} train100p >& train.log
 
 end_time=`date +%s`
 time=$((end_time - start_time))
