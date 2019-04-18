@@ -8,7 +8,7 @@ LANG_PAIR=${5}
 MODEL_DIR=${WORK_DIR}/models
 DATASET=${DATA_DIR}/kftt-data-1.0/data/tok
 
-NUM_EPOCH=25
+NUM_EPOCH=50
 
 if [ -e $MODEL_DIR/$LANG_PAIR.done ]; then
 	echo "model is already trained. Skip"
