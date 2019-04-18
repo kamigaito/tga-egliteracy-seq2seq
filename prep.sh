@@ -28,7 +28,7 @@ head -n $((`cat ${DATASET}/train.shuf | wc -l`/5)) ${DATASET}/train.shuf | cut -
 head -n $((3*`cat ${DATASET}/train.shuf | wc -l`/5)) ${DATASET}/train.shuf | cut -f 1 > ${DATASET}/train60p.en
 head -n $((3*`cat ${DATASET}/train.shuf | wc -l`/5)) ${DATASET}/train.shuf | cut -f 2 > ${DATASET}/train60p.ja
 cut -f 1 ${DATASET}/train.shuf > ${DATASET}/train100p.en
-cut -f 1 ${DATASET}/train.shuf > ${DATASET}/train100p.ja
+cut -f 2 ${DATASET}/train.shuf > ${DATASET}/train100p.ja
 
 cd ${ROOT_DIR}/apps/OpenNMT-py
 suffix="en-ja ja-en"
