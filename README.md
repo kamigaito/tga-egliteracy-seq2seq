@@ -36,6 +36,18 @@ ${ROOT_DIR}/appsに必要なツール類
 ```
 により行う．
 
+デフォルトでは日英翻訳のみ行う．英日翻訳を行いたい場合，run.sh内の
+```
+LANG_PAIR=ja-en #japanese -> english
+#LANG_PAIR=en-ja #english -> japanese
+```
+を次のように書き換える．
+```
+#LANG_PAIR=ja-en #japanese -> english
+LANG_PAIR=en-ja #english -> japanese
+```
+
+
 実行後の翻訳結果は
 ```
 # 英語から日本語
