@@ -26,6 +26,6 @@ start_time=`date +%s`
 
 end_time=`date +%s`
 time=$((end_time - start_time))
-echo $time >& train.time.log
+echo "${time} (sec)" >& train.time.log
 
 ./eval.sh ${ROOT_DIR} ${DATA_DIR} ${WORK_DIR} ${LANG_PAIR} >& eval.log
