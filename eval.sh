@@ -32,7 +32,7 @@ perl ${ROOT_DIR}/scripts/multi-bleu.perl \
     < ${OUT_DIR}/test.${trg} \
     > ${OUT_DIR}/result_${LANG_PAIR}.bleu
 
-cp ${OUT_DIR}/result_${LANG_PAIR}.bleu ${SCORE_PATH}
+cat ${OUT_DIR}/result_${LANG_PAIR}.bleu | sed -r 's/(BLEU = [0-9]*\.[0-9]*), .*/\1/g' > ${SCORE_PATH}
 if [ ! -e ${USRDIR}/user.${src} ]
 then
     echo "${USRDIR}/user.${src} does not exist."
