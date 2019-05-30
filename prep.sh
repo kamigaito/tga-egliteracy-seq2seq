@@ -7,7 +7,7 @@ DATASET=${DATA_DIR}/kftt-data-1.0/data/tok
 
 mkdir -p $WORK_DIR/input
 
-if [ ! -e ${APPS_DIR}/done ]
+if [ ${APPS_DIR} != /gs/hs0/tga-egliteracy/egs/seq2seq/apps ] && [ ! -e ${APPS_DIR}/done ]
 then
   echo "download and make apps..."
   ./setup.sh ${APPS_DIR}
