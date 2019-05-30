@@ -1,9 +1,10 @@
 #!/bin/sh
 
-ROOT_DIR=${1}
-DATA_DIR=${2}
-WORK_DIR=${3}
-LANG_PAIR=${4}
+APPS_DIR=${1}
+SCRIPT_DIR=${2}
+DATA_DIR=${3}
+WORK_DIR=${4}
+LANG_PAIR=${5}
 MODELS=${WORK_DIR}/models
 DATASET=${DATA_DIR}/kftt-data-1.0/data/tok
 OUT_DIR=${WORK_DIR}/outputs
@@ -15,7 +16,7 @@ then
     mkdir -p ${OUT_DIR}
 fi
 
-cd ${ROOT_DIR}/apps/OpenNMT-py
+cd ${APPS_DIR}/OpenNMT-py
 
 src=`echo ${LANG_PAIR} | awk -F"-" '{print $1}'`
 trg=`echo ${LANG_PAIR} | awk -F"-" '{print $2}'`
@@ -27,7 +28,7 @@ python translate.py \
     -beam_size 1 \
     -batch_size 512 \
     -verbose
-perl ${ROOT_DIR}/scripts/multi-bleu.perl \
+perl ${SCRIPT_DIR}/multi-bleu.perl \
     ${DATASET}/kyoto-test.${trg} \
     < ${OUT_DIR}/test.${trg} \
     > ${OUT_DIR}/result_${LANG_PAIR}.bleu
@@ -42,14 +43,14 @@ fi
 if [ ${src} = "ja" -a ${src} != "en" ]
 then
     # Tokenize Japanese sentences
-    bash ${ROOT_DIR}/apps/kytea-0.4.7/src/bin/kytea \
+    bash ${APPS_DIR}/kytea-0.4.7/src/bin/kytea \
     < ${USRDIR}/user.${src} |\
     sed 's/\/[^ ]\+//g' \
     > ${USRDIR}/user.tok.${src}
 elif [ ${src} = "en" -a ${src} != "ja" ]
 then
     # Tokenize English sentences
-    perl ${ROOT_DIR}/apps/mosesdecoder/scripts/tokenizer/tokenizer.perl \
+    perl ${APPS_DIR}/mosesdecoder/scripts/tokenizer/tokenizer.perl \
     -l en \
     < ${USRDIR}/user.${src} \
     > ${USRDIR}/user.tok.${src}

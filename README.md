@@ -1,33 +1,5 @@
 # Tsubameを用いたSeq2Seqの実習
 
-# 導入
-
-## 環境変数の設定
-`${ROOT_DIR}/.bashrc`中の`${ROOT_DIR}`を環境に応じて書き換える．
-初期設定では講義にて使用している`/gs/hs0/tga-egliteracy/egs/seq2seq`に設定されている．
-
-## 環境構築
-```
-cd ${ROOT_DIR}
-chmod +x setup.sh
-./setup.sh
-```
-これにより`${ROOT_DIR}`に
-- [anaconda3](https://www.anaconda.com/distribution/)
-がインストールされ，
-pythonモジュール
-- Pytorch
-- TorchText
-- ConfigArgParse
-がインストールされる．
-また，
-${ROOT_DIR}/appsに必要なツール類
-- mosesdecoder
-- OpenNMT-py
-- [kytea-0.4.7](http://www.phontron.com/kytea/download/kytea-0.4.7.tar.gz)
-がそれぞれインストールされる．
-[kytea](http://www.phontron.com/kytea/download/kytea-0.4.7.tar.gz)についてはprefixをkyteaのディレクトリ直下としてインストールされる．
-
 # 実行方法
 
 実行はTsubameのログインノードにおいて

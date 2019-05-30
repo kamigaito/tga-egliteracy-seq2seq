@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR=${1}
+APPS_DIR=${1}
 DATA_DIR=${2}
 WORK_DIR=${3}
 TRAIN_NAME=${4}
@@ -22,7 +22,7 @@ fi
 
 NUM_DATA=$(cat ${DATASET}/${TRAIN_NAME}.en | wc -l)
 
-cd ${ROOT_DIR}/apps/OpenNMT-py
+cd ${APPS_DIR}/OpenNMT-py
 
 batch_size=256
 num_steps=$((${NUM_DATA}*${NUM_EPOCH}/${batch_size}))
@@ -39,7 +39,7 @@ python train.py \
     -report_every 1 \
     -save_checkpoint_steps ${num_steps} \
     -train_steps ${num_steps} \
-    -gpu_rank 0
+    -gpu_rank 0 || exit 1
 cp ${MODEL_DIR}/${LANG_PAIR}_step_${num_steps}.pt ${MODEL_DIR}/${LANG_PAIR}_final.pt
 
 touch $MODEL_DIR/$LANG_PAIR.done
