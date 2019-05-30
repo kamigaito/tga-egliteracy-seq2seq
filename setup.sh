@@ -1,7 +1,6 @@
 #!/bin/bash
 
-ROOT_DIR=$(cd $(dirname $0); pwd)
-APP_DIR=${ROOT_DIR}/apps
+APP_DIR=${1}
 
 if [ ! -e ${APP_DIR} ]
 then
@@ -19,12 +18,4 @@ cd kytea-0.4.7
 make
 make install
 
-cd ..
-cd ..
-
-wget https://repo.anaconda.com/archive/Anaconda3-2018.12-Linux-x86_64.sh
-chmod +x Anaconda3-2018.12-Linux-x86_64.sh
-./Anaconda3-2018.12-Linux-x86_64.sh
-conda install pytorch
-conda install torchtext
-conda install configargparse
+touch $APP_DIR/done
